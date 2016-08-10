@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name : c++ qihoo file comment
+# key: qihoo
+# --
+/**
+ *  @author  Jian Dong (dongjian-iri@360.cn)
+ *  @date    `(format-time-string "%Y-%m-%d" (current-time))`
+ *  @version 1.0
+ *
+ *  @copyright Copyright 2016-2017 Qihoo 360. All rights reserved.
+ *
+ *  @brief $1
+ */

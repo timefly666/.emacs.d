@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name : c++ file comment
+# key: file
+# --
+/**
+ *  @author  Jian Dong
+ *  @date    `(format-time-string "%Y-%m-%d" (current-time))`
+ *  @version 1.0
+ *
+ *  @brief $1
+ */

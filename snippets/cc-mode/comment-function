@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name : c++ function comment
+# key: func
+# --
+/**
+ *  @brief $1
+ *
+ *  @param $2
+ */

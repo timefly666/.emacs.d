@@ -1,12 +1,12 @@
 (add-to-list 'load-path "~/.emacs.d/3rd_party/custom")
-(add-to-list 'load-path "~/.emacs.d/3rd_party/libs/google")
+(add-to-list 'load-path "~/.emacs.d/3rd_party/package/flycheck-google-cpplint")
 
 (prelude-require-packages
-  '(
-    flycheck-google-cpplint
-    company-c-headers
-  )
-)
+ '(
+   google-c-style
+   company-c-headers
+   )
+ )
 
 ;;---------- google-c-style
 (require 'google-c-style)
@@ -18,25 +18,18 @@
 (defun cpplint ()
   "check source code format according to Google Style Guide"
   (interactive)
-  (compilation-start (concat "python ~/.emacs.d/3rd_party/libs/google/cpplint.py " (buffer-file-name))))
+  (compilation-start (concat "python ~/.emacs.d/3rd_party/tool/google/cpplint.py " (buffer-file-name))))
 
+(require 'flycheck-google-cpplint)
 (eval-after-load 'flycheck
   '(progn
      (require 'flycheck-google-cpplint)
      ;; Add Google C++ Style checker.
      ;; In default, syntax checked by Clang and Cppcheck.
-     ;; (flycheck-add-next-checker 'c/c++-paycheck
-     ;; '(warning . c/c++-googlelint)))
-
+     (flycheck-add-next-checker 'c/c++-cppcheck
+                                '(warning . c/c++-googlelint))))
      ;; (flycheck-add-next-checker 'c/c++-clang
-                                ;; '(warning . c/c++-googlelint))))
-
-     (flycheck-add-next-checker 'c/c++-clang
-                                '(t . c/c++-googlelint))))
-
-
-(custom-set-variables
- '(flycheck-c/c++-googlelint-executable (expand-file-name "~/.emacs.d/3rd_party/libs/google/cpplint.py")))
+     ;;                            '(warning . c/c++-googlelint))))
 
 (custom-set-variables
  '(flycheck-googlelint-verbose "3")
@@ -45,19 +38,31 @@
  '(flycheck-googlelint-linelength "120")
  )
 
-;; company
+(custom-set-variables
+ '(flycheck-c/c++-googlelint-executable (expand-file-name "~/.emacs.d/3rd_party/tool/google/cpplint.py")))
+
+;;---------- flycheck
+;; (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-gcc))
+
+;;---------- company
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+
+;; company with clang
 (delete 'company-semantic company-backends)
 (define-key c-mode-map [(control tab)] 'company-complete)
 (define-key c++-mode-map [(control tab)] 'company-complete)
 
+;;
 ;; company-c-headers
 (require 'company-c-headers)
 (add-to-list 'company-backends 'company-c-headers)
-;; by default only /usr/include/ and /usr/local/include/ are included
-(add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8.5/")
 
+;;---------- path
+;; by default only /usr/include/ and /usr/local/include/ are included
+(add-to-list 'company-c-headers-path-system "/usr/include/c++/4.9/")
+
+;;---------- set hook
 ;; hook
 (add-hook 'c-mode-common-hook 'env-cpp-defaults)
 
@@ -70,7 +75,6 @@
   ;;---------- clang
   (require 'setup-helm-gtags)
   ;; (require 'setup-ggtags)
-
 
   ;;---------- cedet
   ;; (require 'setup-cedet)

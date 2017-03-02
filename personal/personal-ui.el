@@ -22,6 +22,9 @@
 (add-hook 'python-mode-hook 'fci-mode)
 (setq fci-rule-column 80)
 
-(provide 'personal-ui)
+;; xml indent
+(setq nxml-child-indent 2)
+(setq nxml-attribute-indent 2)
 
+(provide 'personal-ui)
 ;;; personal-ui.el ends here

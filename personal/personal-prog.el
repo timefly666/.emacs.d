@@ -7,9 +7,12 @@
  )
 
 ;;
+(require 'clang-format)
+(setq clang-format-style-option "google")
+
+;;
 (require 'flycheck-tip)
 (define-key c++-mode-map (kbd "C-c C-n") 'flycheck-tip-cycle)
-(flycheck-tip-use-timer 'verbose)
 
 ;;
 (require 'yasnippet)

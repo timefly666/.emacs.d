@@ -8,6 +8,7 @@
 ;; protobuf
 (require 'protobuf-mode)
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+(add-to-list 'auto-mode-alist '("\\.prototxt\\'" . protobuf-mode))
 
 ;;
 (add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))

@@ -13,7 +13,6 @@
 
 ;;
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(global-linum-mode t)
 
 ;; enforce the line length to be 80
 (add-hook 'c-mode-common-hook 'column-enforce-mode)
